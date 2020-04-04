@@ -1,6 +1,5 @@
 import leaguepedia_parser
 import json
-import urllib.parse
 import urllib.request
 
 lp = leaguepedia_parser.LeaguepediaParser()
@@ -12,6 +11,8 @@ tournaments = lp.get_tournaments('Europe', year=2020,tournament_level='Secondary
 for i in tournaments:
     if i['name'] == 'LFL Division 2 2020':
         games = lp.get_games(i['name'])
+
+print(games)
 
 index = 0
 urlDIV2 = []
@@ -34,7 +35,7 @@ for i in s:
 print(url)
 
 headers = {}
-headers['cookie'] = "new_visitor=false; _ga=GA1.2.1031275918.1523789907; ajs_group_id=null; s_fid=084E61FD2F17B1A9-1289DE22C7C4D704; C3UID-694=13974767501535292492; C3UID=13974767501535292492; __qca=P0-1655653013-1549286329912; _tlp=2820:16705877; __cfduid=da3ac128a3b3a4bb9b8a6efd6a9eec2921555402977; _scid=92ea0b26-1de4-472c-b7d4-b545cb5180b9; notice_preferences=2:; notice_gdpr_prefs=0,1,2:; _hjid=91d2d6ca-565f-4a84-b767-d17d36043bc0; rp2=1575806458255-Repeat; ajs_user_id=null; _gcl_au=1.1.1748260163.1576528939; PVPNET_TOKEN_EUW=eyJkYXRlX3RpbWUiOjE1NzY1Mjg5NDk2NjksImdhc19hY2NvdW50X2lkIjozNjE3MTI0MCwicHZwbmV0X2FjY291bnRfaWQiOjM2MTcxMjQwLCJzdW1tb25lcl9uYW1lIjoiYXJuYWh1ZCIsInZvdWNoaW5nX2tleV9pZCI6IjkwMzQ3NTJiMmI0NTYwNDRhZTg3ZjI1OTgyZGFkMDdkIiwic2lnbmF0dXJlIjoicE5RWWVua0IyZEdUZW12N0JIc2xaTEcvQVVZb0VGdkJWaXNOUys5K0JJUk5iVWVrK3NOR2RaZ1hlYmhNald5OTAxU2x5UXZYb0xwYVlnV1d0Vk9sM3NvYmt1dDlteFpjYWJuSk02M0N3RXVWdmw2TlRGWjMwd1d1L2hBSlhSNGxiZlBVa3MwMzZlYzBnazVQNExKVXh2L2paVnh6TkM4Y2RrWjFEeEliOTNjPSJ9; PVPNET_ACCT_EUW=arnahud; PVPNET_ID_EUW=36171240; PVPNET_REGION=euw; PVPNET_LANG=fr_FR; id_token=eyJraWQiOiJzMSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxOTFiZjkyOC0zMzBhLTU3MjAtYjMzYy1mZTQ5OGNmODdlOTYiLCJjb3VudHJ5IjoiZnJhIiwiYW1yIjpbImNvb2tpZSJdLCJpc3MiOiJodHRwczpcL1wvYXV0aC5yaW90Z2FtZXMuY29tIiwibG9sIjpbeyJjdWlkIjozNjE3MTI0MCwiY3BpZCI6IkVVVzEiLCJ1aWQiOjM2MTcxMjQwLCJ1bmFtZSI6ImFybmF1ZDMwMTIiLCJwdHJpZCI6bnVsbCwicGlkIjoiRVVXMSIsInN0YXRlIjoiRU5BQkxFRCJ9XSwibG9jYWxlIjoiZnJfRlIiLCJhdWQiOiJyc28td2ViLWNsaWVudC1wcm9kIiwiYWNyIjoiMCIsImV4cCI6MTU3NjYxNTM0OCwiaWF0IjoxNTc2NTI4OTQ4LCJhY2N0Ijp7ImdhbWVfbmFtZSI6ImFybmFodWQiLCJ0YWdfbGluZSI6IkVVVyJ9LCJqdGkiOiJkTzExOEVpVGpQRSIsImxvZ2luX2NvdW50cnkiOiJmcmEifQ.GVGM4Ss5cc4lQKXaZnkXYXjbp5F4iSWYd6HPkqCqT4l0va7EF0INbHNLONmOKnS4c9-htLnMCpl1I9LmlexRIM58CodTO7OGz5tqP8kirtJ7KCeqAIbrsvWrDN3jQA5bHyoWiX3IPB3E8C76AOZ5BaAN-AE0sYSy5TpDjHo_hOw; id_hint=sub%3D191bf928-330a-5720-b33c-fe498cf87e96%26lang%3Dfr%26game_name%3Darnahud%26tag_line%3DEUW%26id%3D36171240%26summoner%3Darnahud%26region%3DEUW1%26tag%3Deuw; _tlc=:1576531469:euw.leagueoflegends.com%2Ffr%2F:leagueoflegends.com; _tlv=92.1550590967.1567793215.1576531488.242.1.2; ping_session_id=3adfe217-a333-4dab-996e-3c8a2d1a61c4; _gid=GA1.2.803505458.1577904415; _gat=1"
+headers['cookie'] = "_gcl_au=1.1.2106265452.1579169629; _ga=GA1.2.1669728078.1579169630; _hjid=ccd9b883-792f-4aff-a0f8-0c8f711e7b25; ajs_group_id=null; _tlp=2820:16705877; s_fid=058B095915A9A931-3F4CE3FE9F899602; notice_preferences=3:; notice_gdpr_prefs=0,1,2,3:; cmapi_gtm_bl=; cmapi_cookie_privacy=permit 1,2,3,4; new_visitor=false; rp2=1582554081607-Repeat; ajs_user_id=null; ping_session_id=d51f4f11-2f7b-444c-bd14-93dbeeb069b8; _gid=GA1.2.906518356.1585303136; PVPNET_TOKEN_EUW=eyJkYXRlX3RpbWUiOjE1ODUzMDMxNDA5ODQsImdhc19hY2NvdW50X2lkIjozNjE3MTI0MCwicHZwbmV0X2FjY291bnRfaWQiOjM2MTcxMjQwLCJzdW1tb25lcl9uYW1lIjoiYXJuYWh1ZCIsInZvdWNoaW5nX2tleV9pZCI6IjkwMzQ3NTJiMmI0NTYwNDRhZTg3ZjI1OTgyZGFkMDdkIiwic2lnbmF0dXJlIjoiV093c2tDRU1tT3FNKzFOMlh5U05mb2ROUHpJU0VwbE9uYmYwY3BTMDB1NklzYnhYalErZWtpdjlveEFIVFFCNTJVd3pOclc4TDFnOVhpMExqWURpT2N6MWZ6V1g4Rll4aE5yeXdsaWtZcm51Vy9BSjlMbkIwSGFNSytYVllkdTJteTg2bDFyMU4xL0hnWlB2cWI5YndhNHdnM1Q2OXJ2cjk1MFFuQm1KQ1A4PSJ9; PVPNET_ACCT_EUW=arnahud; PVPNET_ID_EUW=36171240; PVPNET_REGION=euw; PVPNET_LANG=fr_FR; id_token=eyJraWQiOiJzMSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxOTFiZjkyOC0zMzBhLTU3MjAtYjMzYy1mZTQ5OGNmODdlOTYiLCJjb3VudHJ5IjoiZnJhIiwicGxheWVyX3Bsb2NhbGUiOiJlbi1VUyIsImFtciI6WyJjb29raWUiXSwiaXNzIjoiaHR0cHM6XC9cL2F1dGgucmlvdGdhbWVzLmNvbSIsImxvbCI6W3siY3VpZCI6MzYxNzEyNDAsImNwaWQiOiJFVVcxIiwidWlkIjozNjE3MTI0MCwidW5hbWUiOiJhcm5hdWQzMDEyIiwicHRyaWQiOm51bGwsInBpZCI6IkVVVzEiLCJzdGF0ZSI6IkVOQUJMRUQifV0sImxvY2FsZSI6ImZyX0ZSIiwiYXVkIjoicnNvLXdlYi1jbGllbnQtcHJvZCIsImFjciI6IjAiLCJwbGF5ZXJfbG9jYWxlIjoiZW4tVVMiLCJleHAiOjE1ODUzODk1MzksImlhdCI6MTU4NTMwMzEzOSwiYWNjdCI6eyJnYW1lX25hbWUiOiJhcm5haHVkIiwidGFnX2xpbmUiOiJFVVcifSwianRpIjoiWGllVkY2cmZSNWMiLCJsb2dpbl9jb3VudHJ5Ijoia29yIn0.Xgn17hWMwj5AW6saTL6ayD91ulTuFDsTmMwL1BhXLQGwSCKdJmnUDRW4S6UPLV0HM1bjJR_nCPt1jIjjTFIj9_1K41kWES92fgGiIyPN0iFHUhIuMuaC-3884GBEdatEzjIJaXEITyT7YGn4k9QDp_iL16SobiQXFOKFiBm7x-I; id_hint=sub%3D191bf928-330a-5720-b33c-fe498cf87e96%26lang%3Dfr%26game_name%3Darnahud%26tag_line%3DEUW%26id%3D36171240%26summoner%3Darnahud%26region%3DEUW1%26tag%3Deuw; __cfduid=da678c9c05c0a89c271415567126e7c781585303142; notice_behavior=implied,eu; _sctr=1|1585263600000; _tlc=t.co%2FQDlftBwhJU%3Famp%3D1:1585317227:euw.leagueoflegends.com%2Fen-gb%2F:leagueoflegends.com; _tlv=11.1579169631.1584537018.1585317227.17.1.1; _gat=1"
 
 obj = []
 for i in url:
@@ -44,9 +45,39 @@ for i in url:
     # parse json object
     obj.append(json.loads(html))
 
-print(obj[0]['teams'][0])
+#J'ai tous les JSON des matchs
+#Je veux sortir pour chaque joueurs, deaths et totalDamageDealtToChampions
+print(obj[0]['participantIdentities'])
 
+playerPseudo = []
+for i in obj:
+    for j in i['participantIdentities']:
+        playerPseudo.append(j['player']['summonerName'])
 
+playerPseudo = dict.fromkeys(playerPseudo)
+print(len(playerPseudo),playerPseudo)
 
+for i in playerPseudo:
+    playerPseudo[i] = {'deaths': 0, 'totalDamageDealtToChampions': 0}
+
+for i in obj:
+    print(i['gameDuration'])
+
+for i in obj:
+    for j in i['participantIdentities']:
+        for k in playerPseudo:
+            if k == j['player']['summonerName']:
+                id = j['participantId']
+                for l in i['participants']:
+                    if l['participantId'] == id:
+                        playerPseudo[k] = {'deaths': (playerPseudo[k]['deaths'] + (l['stats']['deaths']/(i['gameDuration']/60)))/7, 'totalDamageDealtToChampions': (playerPseudo[k]['totalDamageDealtToChampions'] + (l['stats']['totalDamageDealtToChampions']/(i['gameDuration']/60)))/7}
+
+print(playerPseudo)
+
+exportJSON = json.dumps(playerPseudo)
+
+f = open("Div2_Players_stats.json", "w")
+f.write(exportJSON)
+f.close()
 
 
