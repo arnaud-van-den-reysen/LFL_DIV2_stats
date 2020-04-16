@@ -41,9 +41,61 @@ obj = []
 for i in url:
     req = urllib.request.Request(i, headers = headers)
     html = urllib.request.urlopen(req).read().decode()
-    print(html)
     # parse json object
     obj.append(json.loads(html))
+
+#correction des datas : correction des noms des joueurs
+for i in obj:
+    for j in i['participantIdentities']:
+        if j['player']['summonerName'] == 'TPAA Louis':
+            j['player']['summonerName'] = 'TPAA NoTiixX'
+        if j['player']['summonerName'] == 'Chapovich' or j['player']['summonerName'] == 'Lunary Chapi':
+            j['player']['summonerName'] = 'LUNARY CHAP'
+        if j['player']['summonerName'] == 'UFZ Akabane1':
+            j['player']['summonerName'] = 'UFZ Akabane'
+        if j['player']['summonerName'] == 'Lunary Jbzz':
+            j['player']['summonerName'] = 'LUNARY Jbzz'
+        if j['player']['summonerName'] == 'LUNARY TIOO' or j['player']['summonerName'] == 'Nulary Tioo':
+            j['player']['summonerName'] = 'LUNARY Tioo'
+        if j['player']['summonerName'] == 'LUNARY SHARKY' or j['player']['summonerName'] == 'LUNARY SHARKK':
+            j['player']['summonerName'] = 'LUNARY Sharkk'
+        if j['player']['summonerName'] == 'UFZ Nuclear':
+            j['player']['summonerName'] = 'UFZ Nuclearint'
+        if j['player']['summonerName'] == 'TH SenZu':
+            j['player']['summonerName'] = 'TH Senzu'
+        if j['player']['summonerName'] == 'GO Zenöz':
+            j['player']['summonerName'] = 'GO Zenoz'
+        if j['player']['summonerName'] == 'MZG Melon ':
+            j['player']['summonerName'] = 'MZG Melon'
+        if j['player']['summonerName'] == 'Lunary Exakick':
+            j['player']['summonerName'] = 'LUNARY Exakick'
+        if j['player']['summonerName'] == 'UFZ Adam':
+            j['player']['summonerName'] = 'KC Adam'
+        if j['player']['summonerName'] == 'UFZ Akabane':
+            j['player']['summonerName'] = 'KC Akabane'
+        if j['player']['summonerName'] == 'UFZ Nuclearint':
+            j['player']['summonerName'] = 'KC Nuclearint'
+        if j['player']['summonerName'] == 'UFZ Jujutw0':
+            j['player']['summonerName'] = 'KC Jujutw0'
+        if j['player']['summonerName'] == 'UFZ Helaz':
+            j['player']['summonerName'] = 'KC Helaz'
+
+for i in obj:
+    gold100 = 0;
+    gold200 = 0;
+    for j in i['participants']:
+        if j['teamId'] == 100:
+            gold100 += j['stats']['goldSpent']
+        else:
+            gold200 += j['stats']['goldSpent']
+    for j in i['participants']:
+        if j['teamId'] == 100:
+            j['stats']['goldSpentPercentage'] = j['stats']['goldSpent'] / gold100
+        else:
+            j['stats']['goldSpentPercentage'] = j['stats']['goldSpent'] / gold200
+
+for i in obj:
+    print(i)
 
 #J'ai tous les JSON des matchs
 #Je veux sortir pour chaque joueurs, deaths et totalDamageDealtToChampions
@@ -58,10 +110,29 @@ playerPseudo = dict.fromkeys(playerPseudo)
 print(len(playerPseudo),playerPseudo)
 
 for i in playerPseudo:
-    playerPseudo[i] = {'deaths': 0, 'totalDamageDealtToChampions': 0}
+    playerPseudo[i] = {'team': '','nbGames': 0,'gameDuration': 0, 'deaths': 0, 'totalDamageDealtToChampions': 0, 'goldSpentPercentage': 0}
 
-for i in obj:
-    print(i['gameDuration'])
+for i in playerPseudo:
+    if i.split(' ',1)[0] == 'GO':
+        playerPseudo[i]['team'] = 'GO'
+    if i.split(' ',1)[0] == 'BTL':
+        playerPseudo[i]['team'] = 'BTL'
+    if i.split(' ',1)[0] == 'MZG':
+        playerPseudo[i]['team'] = 'MZG'
+    if i.split(' ',1)[0] == 'FCN':
+        playerPseudo[i]['team'] = 'FCN'
+    if i.split(' ',1)[0] == 'TPAA':
+        playerPseudo[i]['team'] = 'TPAA'
+    if i.split(' ',1)[0] == 'LUNARY':
+        playerPseudo[i]['team'] = 'LUNARY'
+    if i.split(' ',1)[0] == 'ZPR':
+        playerPseudo[i]['team'] = 'ZPR'
+    if i.split(' ',1)[0] == 'KC':
+        playerPseudo[i]['team'] = 'KC'
+    if i.split(' ',1)[0] == 'TH':
+        playerPseudo[i]['team'] = 'TH'
+    if i.split(' ',1)[0] == 'OPL':
+        playerPseudo[i]['team'] = 'OPL'
 
 for i in obj:
     for j in i['participantIdentities']:
@@ -70,7 +141,11 @@ for i in obj:
                 id = j['participantId']
                 for l in i['participants']:
                     if l['participantId'] == id:
-                        playerPseudo[k] = {'deaths': (playerPseudo[k]['deaths'] + (l['stats']['deaths']/(i['gameDuration']/60)))/7, 'totalDamageDealtToChampions': (playerPseudo[k]['totalDamageDealtToChampions'] + (l['stats']['totalDamageDealtToChampions']/(i['gameDuration']/60)))/7}
+                        playerPseudo[k]['nbGames'] += 1
+                        playerPseudo[k]['gameDuration'] += i['gameDuration'] / 60
+                        playerPseudo[k]['deaths'] += l['stats']['deaths']
+                        playerPseudo[k]['totalDamageDealtToChampions'] += l['stats']['totalDamageDealtToChampions']
+                        playerPseudo[k]['goldSpentPercentage'] += l['stats']['goldSpentPercentage']
 
 print(playerPseudo)
 
